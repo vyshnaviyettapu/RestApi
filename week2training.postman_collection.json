@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "2e119859-9997-4dce-9ac7-1ce0a078731a",
+		"name": "week2training",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create Change Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create Change Request\", function () {\r",
+							"\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"// pm.test(\"Short Description\", function () {\r",
+							"//     pm.expect(pm.response.text()).to.include(\"change request creation\");\r",
+							"// });\r",
+							"\r",
+							"// var res = pm.response.json();\r",
+							"// var systemid = res.result.sys_id;\r",
+							"// console.log(res.result.sys_id);\r",
+							"// pm.globals.set(\"SysID\", systemid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"short_description\": \"{{short_desc}}\",\r\n    \"description\": \"{{desc}}\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURi}}/api/now/table/{{change_request}}?sysparm_fields=short_description%2Cdescription",
+					"host": [
+						"{{BaseURi}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"{{change_request}}"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "short_description%2Cdescription"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateChangeRequest",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"short_description\": \"updated via postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURi}}/api/now/table/{{change_request}}/{{SysID}}",
+					"host": [
+						"{{BaseURi}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"{{change_request}}",
+						"{{SysID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Deleted Sucessfully\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURi}}/api/now/table/{{change_request}}/{{SysID}}",
+					"host": [
+						"{{BaseURi}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"{{change_request}}",
+						"{{SysID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "2y%Q8f%hVRsJ",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "change_request",
+			"value": "change_request",
+			"type": "default"
+		}
+	]
+}
